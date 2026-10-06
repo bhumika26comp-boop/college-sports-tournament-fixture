@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ sport["sport_name"] }} Registration</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background: linear-gradient(
+                135deg,
+                #071426,
+                #17365d
+            );
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 30px;
+
+        }
+
+
+        .container {
+
+            width: 100%;
+
+            max-width: 600px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 40px;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.3);
+
+        }
+
+
+        .sport-icon {
+
+            text-align: center;
+
+            font-size: 70px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        h1 {
+
+            text-align: center;
+
+            color: #071426;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #718096;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        /* SELECTED SPORT BOX */
+
+        .selected-sport {
+
+            background: #fff8d8;
+
+            border: 1px solid #f7c83e;
+
+            border-radius: 10px;
+
+            padding: 15px;
+
+            margin-bottom: 25px;
+
+            text-align: center;
+
+            color: #071426;
+
+        }
+
+
+        .selected-sport strong {
+
+            font-size: 15px;
+
+        }
+
+
+        .selected-sport span {
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            margin-left: 5px;
+
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-weight: bold;
+
+            color: #071426;
+
+        }
+
+
+        input,
+        select {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 8px;
+
+            margin-bottom: 20px;
+
+            font-size: 15px;
+
+        }
+
+
+        input:focus,
+        select:focus {
+
+            outline: none;
+
+            border-color: #f7c83e;
+
+        }
+
+
+        .register-btn {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #f7c83e;
+
+            color: #071426;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .register-btn:hover {
+
+            background: #eab62d;
+
+        }
+
+
+        .back {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #071426;
+
+            text-decoration: none;
+
+        }
+
+
+        .back:hover {
+
+            text-decoration: underline;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- SPORT ICON -->
+
+    <div class="sport-icon">
+
+        {% if sport["sport_name"] == "Football" %}
+
+            ⚽
+
+        {% elif sport["sport_name"] == "Cricket" %}
+
+            🏏
+
+        {% elif sport["sport_name"] == "Badminton" %}
+
+            🏸
+
+        {% elif sport["sport_name"] == "Basketball" %}
+
+            🏀
+
+        {% else %}
+
+            🏆
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- TITLE -->
+
+    <h1>
+
+        {{ sport["sport_name"] }} Registration
+
+    </h1>
+
+
+    <p class="subtitle">
+
+        Register for the College
+        {{ sport["sport_name"] }}
+        Tournament
+
+    </p>
+
+
+    <!-- SELECTED SPORT -->
+
+    <div class="selected-sport">
+
+        <strong>
+            Selected Sport:
+        </strong>
+
+        <span>
+
+            {% if sport["sport_name"] == "Football" %}
+                ⚽
+            {% elif sport["sport_name"] == "Cricket" %}
+                🏏
+            {% elif sport["sport_name"] == "Badminton" %}
+                🏸
+            {% elif sport["sport_name"] == "Basketball" %}
+                🏀
+            {% endif %}
+
+            {{ sport["sport_name"] }}
+
+        </span>
+
+    </div>
+
+
+    <!-- REGISTRATION FORM -->
+
+    <form
+        method="POST"
+        action="/registration"
+    >
+
+
+        <!--
+            IMPORTANT:
+            This automatically stores the selected sport.
+            Student does NOT need to select sport again.
+        -->
+
+        <input
+            type="hidden"
+            name="sport_id"
+            value="{{ sport['id'] }}"
+        >
+
+
+        <!-- TEAM / PLAYER NAME -->
+
+        <label>
+            Player / Team Name
+        </label>
+
+        <input
+            type="text"
+            name="team_name"
+            placeholder="Enter player or team name"
+            required
+        >
+
+
+        <!-- DEPARTMENT -->
+
+        <label>
+            Department
+        </label>
+
+        <input
+            type="text"
+            name="department"
+            placeholder="Enter your department"
+            required
+        >
+
+
+        <!-- ACADEMIC YEAR -->
+
+        <label>
+            Academic Year
+        </label>
+
+        <select
+            name="year"
+            required
+        >
+
+            <option value="">
+                Select Academic Year
+            </option>
+
+            <option value="First Year">
+                First Year
+            </option>
+
+            <option value="Second Year">
+                Second Year
+            </option>
+
+            <option value="Third Year">
+                Third Year
+            </option>
+
+            <option value="Fourth Year">
+                Fourth Year
+            </option>
+
+        </select>
+
+
+        <!-- SUBMIT -->
+
+        <button
+            type="submit"
+            class="register-btn"
+        >
+
+            REGISTER FOR
+            {{ sport["sport_name"] | upper }}
+
+        </button>
+
+
+    </form>
+
+
+    <!-- BACK BUTTON -->
+
+    <a
+        href="/student-dashboard"
+        class="back"
+    >
+
+        ← Back to Student Dashboard
+
+    </a>
+
+
+</div>
+
+
+</body>
+
+</html>

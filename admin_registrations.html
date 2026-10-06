@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sportify - Manage Registrations</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #071629, #102d4f);
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* ================= HEADER ================= */
+
+        .header {
+            height: 83px;
+            background: #061426;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 55px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            font-size: 38px;
+        }
+
+        .back {
+            text-decoration: none;
+            color: white;
+            border: 1px solid #64748b;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .back:hover {
+            background: #1e293b;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 45px auto;
+        }
+
+        .title {
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .title h1 span {
+            color: #fbc53d;
+        }
+
+        .title p {
+            color: #cbd5e1;
+            font-size: 18px;
+        }
+
+        /* ================= TABLE CARD ================= */
+
+        .table-card {
+            background: #263b55;
+            border: 1px solid #52657d;
+            border-radius: 18px;
+            padding: 25px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        th {
+            background: #102d4f;
+            color: #fbc53d;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 15px;
+        }
+
+        td {
+            padding: 16px 12px;
+            border-bottom: 1px solid #52657d;
+            color: #f1f5f9;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: #304863;
+        }
+
+        /* ================= STATUS ================= */
+
+        .status {
+            display: inline-block;
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .approved {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .action {
+            display: flex;
+            gap: 8px;
+        }
+
+        .approve {
+            text-decoration: none;
+            background: #22c55e;
+            color: white;
+            padding: 8px 13px;
+            border-radius: 7px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .approve:hover {
+            background: #16a34a;
+        }
+
+        .reject {
+            text-decoration: none;
+            background: #ef4444;
+            color: white;
+            padding: 8px 13px;
+            border-radius: 7px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .reject:hover {
+            background: #dc2626;
+        }
+
+        /* ================= NO DATA ================= */
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #cbd5e1;
+            font-size: 18px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            text-align: center;
+            color: #9caabd;
+            margin-top: 50px;
+            padding-bottom: 30px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="header">
+
+        <div class="logo">
+
+            <div class="logo-icon">🏆</div>
+
+            <div>SPORTIFY</div>
+
+        </div>
+
+        <a href="/admin-dashboard" class="back">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="container">
+
+
+        <!-- TITLE -->
+
+        <div class="title">
+
+            <h1>
+                Manage <span>Registrations</span> 📝
+            </h1>
+
+            <p>
+                Review student registrations and approve or reject applications.
+            </p>
+
+        </div>
+
+
+        <!-- ================= REGISTRATION TABLE ================= -->
+
+        <div class="table-card">
+
+            {% if registrations %}
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Student</th>
+
+                        <th>Sport</th>
+
+                        <th>Team Name</th>
+
+                        <th>Department</th>
+
+                        <th>Year</th>
+
+                        <th>Status</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for registration in registrations %}
+
+                    <tr>
+
+                        <td>
+                            {{ registration.username }}
+                        </td>
+
+                        <td>
+                            {{ registration.sport_name }}
+                        </td>
+
+                        <td>
+                            {{ registration.team_name }}
+                        </td>
+
+                        <td>
+                            {{ registration.department }}
+                        </td>
+
+                        <td>
+                            {{ registration.year }}
+                        </td>
+
+
+                        <!-- STATUS -->
+
+                        <td>
+
+                            {% if registration.status == "Pending" %}
+
+                                <span class="status pending">
+                                    Pending
+                                </span>
+
+                            {% elif registration.status == "Approved" %}
+
+                                <span class="status approved">
+                                    Approved
+                                </span>
+
+                            {% else %}
+
+                                <span class="status rejected">
+                                    Rejected
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- ACTION -->
+
+                        <td>
+
+                            <div class="action">
+
+                                {% if registration.status != "Approved" %}
+
+                                <a
+                                    href="/approve-registration/{{ registration.id }}"
+                                    class="approve"
+                                >
+                                    ✓ Approve
+                                </a>
+
+                                {% endif %}
+
+
+                                {% if registration.status != "Rejected" %}
+
+                                <a
+                                    href="/reject-registration/{{ registration.id }}"
+                                    class="reject"
+                                >
+                                    ✕ Reject
+                                </a>
+
+                                {% endif %}
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {% else %}
+
+            <div class="no-data">
+
+                📋 No registrations found.
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <div class="footer">
+
+        Sportify © 2026 | College Sports Tournament Portal
+
+    </div>
+
+
+</body>
+
+</html>

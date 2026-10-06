@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sportify - Points Table</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background: linear-gradient(
+                135deg,
+                #071426,
+                #17365d
+            );
+
+            min-height: 100vh;
+
+            color: white;
+
+            padding-bottom: 40px;
+        }
+
+
+        /* HEADER */
+
+        .header {
+
+            background: #06111f;
+
+            padding: 20px 50px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.3);
+        }
+
+
+        .logo {
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            color: #f7c83e;
+        }
+
+
+        .logo span {
+
+            color: white;
+        }
+
+
+        .back-btn {
+
+            text-decoration: none;
+
+            background: #f7c83e;
+
+            color: #071426;
+
+            padding: 10px 20px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+
+        .back-btn:hover {
+
+            background: #eab62d;
+        }
+
+
+        /* MAIN */
+
+        .main {
+
+            width: 90%;
+
+            max-width: 1200px;
+
+            margin: 40px auto;
+        }
+
+
+        .page-title {
+
+            text-align: center;
+
+            font-size: 38px;
+
+            margin-bottom: 10px;
+
+            color: white;
+        }
+
+
+        .page-subtitle {
+
+            text-align: center;
+
+            color: #cbd5e1;
+
+            margin-bottom: 35px;
+
+            font-size: 16px;
+        }
+
+
+        /* SPORT CARD */
+
+        .sport-card {
+
+            background: #0d2139;
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            margin-bottom: 35px;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.3);
+
+            border: 1px solid rgba(247,200,62,0.25);
+        }
+
+
+        /* SPORT TITLE */
+
+        .sport-title {
+
+            background: #071426;
+
+            border-radius: 12px;
+
+            padding: 16px 20px;
+
+            margin-bottom: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            border-left: 5px solid #f7c83e;
+        }
+
+
+        .sport-icon {
+
+            font-size: 30px;
+        }
+
+
+        .sport-name {
+
+            font-size: 24px;
+
+            font-weight: bold;
+
+            color: #f7c83e;
+        }
+
+
+        /* TABLE */
+
+        .table-container {
+
+            overflow-x: auto;
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 650px;
+        }
+
+
+        th {
+
+            background: #f7c83e;
+
+            color: #071426;
+
+            padding: 14px;
+
+            text-align: center;
+
+            font-size: 15px;
+        }
+
+
+        td {
+
+            padding: 14px;
+
+            text-align: center;
+
+            border-bottom: 1px solid #29415e;
+
+            color: white;
+
+            font-size: 15px;
+        }
+
+
+        tr:last-child td {
+
+            border-bottom: none;
+        }
+
+
+        tr:hover td {
+
+            background: #122d4c;
+        }
+
+
+        /* TEAM NAME */
+
+        .team-name {
+
+            font-weight: bold;
+
+            color: white;
+        }
+
+
+        /* POINTS */
+
+        .points {
+
+            color: #f7c83e;
+
+            font-weight: bold;
+
+            font-size: 18px;
+        }
+
+
+        /* RANK */
+
+        .rank {
+
+            font-weight: bold;
+
+            color: #f7c83e;
+        }
+
+
+        /* NO DATA */
+
+        .no-data {
+
+            text-align: center;
+
+            padding: 25px;
+
+            color: #cbd5e1;
+
+            font-size: 15px;
+        }
+
+
+        /* EMPTY MESSAGE */
+
+        .empty-box {
+
+            background: #0d2139;
+
+            border-radius: 18px;
+
+            padding: 50px;
+
+            text-align: center;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.3);
+        }
+
+
+        .empty-icon {
+
+            font-size: 55px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .empty-box h2 {
+
+            color: #f7c83e;
+
+            margin-bottom: 10px;
+        }
+
+
+        .empty-box p {
+
+            color: #cbd5e1;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .header {
+
+                padding: 18px 20px;
+            }
+
+            .logo {
+
+                font-size: 22px;
+            }
+
+            .back-btn {
+
+                padding: 8px 12px;
+
+                font-size: 13px;
+            }
+
+            .main {
+
+                width: 94%;
+
+                margin-top: 25px;
+            }
+
+            .page-title {
+
+                font-size: 30px;
+            }
+
+            .sport-card {
+
+                padding: 15px;
+            }
+
+            .sport-name {
+
+                font-size: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <div class="logo">
+
+        🏆 <span>SPORTIFY</span>
+
+    </div>
+
+
+    <a href="/student-dashboard"
+       class="back-btn">
+
+        ← Dashboard
+
+    </a>
+
+</div>
+
+
+
+<!-- MAIN -->
+
+<div class="main">
+
+
+    <h1 class="page-title">
+
+        🏆 Points Table
+
+    </h1>
+
+
+    <p class="page-subtitle">
+
+        View the points and rankings of all teams
+        sport-wise.
+
+    </p>
+
+
+
+    {% if points %}
+
+
+        <!--
+            GROUP POINTS BY SPORT
+
+            Cricket points will appear
+            only inside Cricket card.
+
+            Basketball points will appear
+            only inside Basketball card.
+
+            Football points will appear
+            only inside Football card.
+        -->
+
+
+        {% for sport_name, sport_points in points|groupby("sport_name") %}
+
+
+            <div class="sport-card">
+
+
+                <!-- SPORT HEADING -->
+
+                <div class="sport-title">
+
+
+                    <div class="sport-icon">
+
+
+                        {% if sport_name == "Football" %}
+
+                            ⚽
+
+                        {% elif sport_name == "Cricket" %}
+
+                            🏏
+
+                        {% elif sport_name == "Badminton" %}
+
+                            🏸
+
+                        {% elif sport_name == "Basketball" %}
+
+                            🏀
+
+                        {% else %}
+
+                            🏆
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                    <div class="sport-name">
+
+                        {{ sport_name }} Points Table
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- TABLE -->
+
+                <div class="table-container">
+
+
+                    <table>
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Rank
+                                </th>
+
+                                <th>
+                                    Team Name
+                                </th>
+
+                                <th>
+                                    Played
+                                </th>
+
+                                <th>
+                                    Won
+                                </th>
+
+                                <th>
+                                    Lost
+                                </th>
+
+                                <th>
+                                    Points
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                            {% for point in sport_points %}
+
+
+                                <tr>
+
+
+                                    <td class="rank">
+
+                                        {{ loop.index }}
+
+                                    </td>
+
+
+                                    <td class="team-name">
+
+                                        {{ point["team_name"] }}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        {{ point["played"] }}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        {{ point["won"] }}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        {{ point["lost"] }}
+
+                                    </td>
+
+
+                                    <td class="points">
+
+                                        {{ point["points"] }}
+
+                                    </td>
+
+
+                                </tr>
+
+
+                            {% endfor %}
+
+
+                        </tbody>
+
+
+                    </table>
+
+
+                </div>
+
+
+            </div>
+
+
+        {% endfor %}
+
+
+    {% else %}
+
+
+        <!-- NO POINTS -->
+
+        <div class="empty-box">
+
+
+            <div class="empty-icon">
+
+                🏆
+
+            </div>
+
+
+            <h2>
+
+                No Points Available
+
+            </h2>
+
+
+            <p>
+
+                Points table will be displayed
+                here once the admin adds the points.
+
+            </p>
+
+
+        </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+</body>
+
+</html>

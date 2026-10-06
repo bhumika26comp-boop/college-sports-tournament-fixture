@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sportify - Manage Match Fixtures</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #071629, #102d4f);
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* ================= HEADER ================= */
+
+        .header {
+            height: 83px;
+            background: #061426;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 55px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            font-size: 38px;
+        }
+
+        .back {
+            text-decoration: none;
+            color: white;
+            border: 1px solid #64748b;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .back:hover {
+            background: #1e293b;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 45px auto;
+        }
+
+        .title {
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .title h1 span {
+            color: #fbc53d;
+        }
+
+        .title p {
+            color: #cbd5e1;
+            font-size: 18px;
+        }
+
+        /* ================= FORM CARD ================= */
+
+        .form-card {
+            background: #263b55;
+            border: 1px solid #52657d;
+            border-radius: 18px;
+            padding: 30px;
+            margin-bottom: 35px;
+        }
+
+        .form-card h2 {
+            color: #fbc53d;
+            margin-bottom: 25px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            color: #e2e8f0;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 13px;
+            border-radius: 8px;
+            border: 1px solid #64748b;
+            background: #102d4f;
+            color: white;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #fbc53d;
+        }
+
+        .form-group select option {
+            background: #102d4f;
+            color: white;
+        }
+
+        .add-button {
+            margin-top: 25px;
+            padding: 13px 25px;
+            border: none;
+            border-radius: 9px;
+            background: #fbc53d;
+            color: #071629;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .add-button:hover {
+            background: #ffd45c;
+        }
+
+        /* ================= FIXTURE TABLE ================= */
+
+        .table-card {
+            background: #263b55;
+            border: 1px solid #52657d;
+            border-radius: 18px;
+            padding: 25px;
+            overflow-x: auto;
+        }
+
+        .table-card h2 {
+            color: #fbc53d;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        th {
+            background: #102d4f;
+            color: #fbc53d;
+            padding: 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #52657d;
+            color: #f1f5f9;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: #304863;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 35px;
+            color: #cbd5e1;
+            font-size: 17px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            text-align: center;
+            color: #9caabd;
+            margin-top: 50px;
+            padding-bottom: 30px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 750px) {
+
+            .header {
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .logo-icon {
+                font-size: 30px;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .title h1 {
+                font-size: 30px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="header">
+
+        <div class="logo">
+
+            <div class="logo-icon">🏆</div>
+
+            <div>SPORTIFY</div>
+
+        </div>
+
+        <a href="/admin-dashboard" class="back">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="container">
+
+
+        <!-- TITLE -->
+
+        <div class="title">
+
+            <h1>
+                Manage <span>Match Fixtures</span> ⚽
+            </h1>
+
+            <p>
+                Create and manage upcoming tournament matches.
+            </p>
+
+        </div>
+
+
+        <!-- ================= ADD FIXTURE ================= -->
+
+        <div class="form-card">
+
+            <h2>
+                ➕ Add New Fixture
+            </h2>
+
+
+            <form method="POST" action="/admin-fixtures">
+
+
+                <div class="form-grid">
+
+
+                    <!-- SPORT -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Select Sport
+                        </label>
+
+                        <select name="sport_id" required>
+
+                            <option value="">
+                                -- Select Sport --
+                            </option>
+
+                            {% for sport in sports %}
+
+                            <option value="{{ sport.id }}">
+                                {{ sport.sport_name }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- TEAM 1 -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Team 1
+                        </label>
+
+                        <input
+                            type="text"
+                            name="team1"
+                            placeholder="Enter Team 1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- TEAM 2 -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Team 2
+                        </label>
+
+                        <input
+                            type="text"
+                            name="team2"
+                            placeholder="Enter Team 2"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- DATE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Match Date
+                        </label>
+
+                        <input
+                            type="date"
+                            name="match_date"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- TIME -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Match Time
+                        </label>
+
+                        <input
+                            type="time"
+                            name="match_time"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- VENUE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Venue
+                        </label>
+
+                        <input
+                            type="text"
+                            name="venue"
+                            placeholder="Enter Venue"
+                            required
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <button type="submit" class="add-button">
+                    ➕ Add Fixture
+                </button>
+
+
+            </form>
+
+        </div>
+
+
+        <!-- ================= FIXTURES LIST ================= -->
+
+        <div class="table-card">
+
+            <h2>
+                📅 Existing Fixtures
+            </h2>
+
+
+            {% if fixtures %}
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Sport</th>
+
+                        <th>Team 1</th>
+
+                        <th>Team 2</th>
+
+                        <th>Date</th>
+
+                        <th>Time</th>
+
+                        <th>Venue</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for fixture in fixtures %}
+
+                    <tr>
+
+                        <td>
+                            {{ fixture.sport_name }}
+                        </td>
+
+                        <td>
+                            {{ fixture.team1 }}
+                        </td>
+
+                        <td>
+                            {{ fixture.team2 }}
+                        </td>
+
+                        <td>
+                            {{ fixture.match_date }}
+                        </td>
+
+                        <td>
+                            {{ fixture.match_time }}
+                        </td>
+
+                        <td>
+                            {{ fixture.venue }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {% else %}
+
+            <div class="no-data">
+
+                ⚽ No fixtures have been added yet.
+
+            </div>
+
+            {% endif %}
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <div class="footer">
+
+        Sportify © 2026 | College Sports Tournament Portal
+
+    </div>
+
+
+</body>
+
+</html>

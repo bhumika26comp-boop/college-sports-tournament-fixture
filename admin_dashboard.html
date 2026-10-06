@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sportify - Admin Dashboard</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #071629, #102d4f);
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* ================= HEADER ================= */
+
+        .header {
+            height: 83px;
+            background: #061426;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 55px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            font-size: 38px;
+        }
+
+        .logout {
+            text-decoration: none;
+            color: white;
+            border: 1px solid #64748b;
+            padding: 13px 25px;
+            border-radius: 10px;
+            font-size: 18px;
+        }
+
+        .logout:hover {
+            background: #1e293b;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 82%;
+            margin: 55px auto;
+        }
+
+        .welcome {
+            margin-bottom: 35px;
+        }
+
+        .welcome h1 {
+            font-size: 44px;
+            margin-bottom: 10px;
+        }
+
+        .welcome h1 span {
+            color: #fbc53d;
+        }
+
+        .welcome p {
+            font-size: 20px;
+            color: #d5dce6;
+        }
+
+        /* ================= STAT CARDS ================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 45px;
+        }
+
+        .stat-card {
+            background: #263b55;
+            border: 1px solid #52657d;
+            border-radius: 18px;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .stat-number {
+            color: #fbc53d;
+            font-size: 34px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .stat-title {
+            color: #d5dce6;
+            font-size: 18px;
+        }
+
+        /* ================= SECTION ================= */
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 32px;
+            margin-bottom: 25px;
+        }
+
+        .section-title span {
+            font-size: 36px;
+        }
+
+        /* ================= ADMIN CARDS ================= */
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .admin-card {
+            background: #263b55;
+            border: 1px solid #52657d;
+            border-radius: 18px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .admin-card:hover {
+            transform: translateY(-3px);
+            transition: 0.2s;
+            border-color: #fbc53d;
+        }
+
+        .admin-info {
+            flex: 1;
+        }
+
+        .admin-icon {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        .admin-info h2 {
+            font-size: 23px;
+            margin-bottom: 8px;
+        }
+
+        .admin-info p {
+            color: #bfc9d6;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .button {
+            display: inline-block;
+            text-decoration: none;
+            background: #fbc53d;
+            color: #071629;
+            padding: 13px 22px;
+            border-radius: 9px;
+            font-size: 16px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .button:hover {
+            background: #ffd45c;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            text-align: center;
+            color: #9caabd;
+            margin-top: 55px;
+            padding-bottom: 30px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 1000px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .admin-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .logo-icon {
+                font-size: 30px;
+            }
+
+            .logout {
+                padding: 10px 15px;
+                font-size: 15px;
+            }
+
+            .container {
+                width: 90%;
+                margin: 35px auto;
+            }
+
+            .welcome h1 {
+                font-size: 32px;
+            }
+
+            .welcome p {
+                font-size: 16px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .button {
+                width: 100%;
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="header">
+
+        <div class="logo">
+
+            <div class="logo-icon">🏆</div>
+
+            <div>SPORTIFY</div>
+
+        </div>
+
+        <a href="/logout" class="logout">
+            Logout
+        </a>
+
+    </div>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="container">
+
+
+        <!-- WELCOME -->
+
+        <div class="welcome">
+
+            <h1>
+                Welcome, <span>Admin</span> 👋
+            </h1>
+
+            <p>
+                Manage registrations, fixtures, results and
+                points table of the college tournament.
+            </p>
+
+        </div>
+
+
+        <!-- ================= STATISTICS ================= -->
+
+        <div class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">📋</div>
+
+                <div class="stat-number">
+                    {{ total_registrations }}
+                </div>
+
+                <div class="stat-title">
+                    Total Registrations
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">⏳</div>
+
+                <div class="stat-number">
+                    {{ pending_registrations }}
+                </div>
+
+                <div class="stat-title">
+                    Pending
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">✅</div>
+
+                <div class="stat-number">
+                    {{ approved_registrations }}
+                </div>
+
+                <div class="stat-title">
+                    Approved
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">❌</div>
+
+                <div class="stat-number">
+                    {{ rejected_registrations }}
+                </div>
+
+                <div class="stat-title">
+                    Rejected
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================= ADMIN CONTROLS ================= -->
+
+        <div class="section-title">
+
+            <span>🏆</span>
+
+            Admin Controls
+
+        </div>
+
+
+        <div class="admin-grid">
+
+
+            <!-- REGISTRATION -->
+
+            <div class="admin-card">
+
+                <div class="admin-info">
+
+                    <div class="admin-icon">
+                        📝
+                    </div>
+
+                    <h2>
+                        Manage Registrations
+                    </h2>
+
+                    <p>
+                        View student registrations and
+                        approve or reject applications.
+                    </p>
+
+                </div>
+
+                <a href="/admin-registrations" class="button">
+                    OPEN →
+                </a>
+
+            </div>
+
+
+            <!-- FIXTURES -->
+
+            <div class="admin-card">
+
+                <div class="admin-info">
+
+                    <div class="admin-icon">
+                        ⚽
+                    </div>
+
+                    <h2>
+                        Match Fixtures
+                    </h2>
+
+                    <p>
+                        Create and manage upcoming
+                        tournament matches.
+                    </p>
+
+                </div>
+
+                <a href="/admin-fixtures" class="button">
+                    OPEN →
+                </a>
+
+            </div>
+
+
+            <!-- RESULTS -->
+
+            <div class="admin-card">
+
+                <div class="admin-info">
+
+                    <div class="admin-icon">
+                        🏆
+                    </div>
+
+                    <h2>
+                        Manage Results
+                    </h2>
+
+                    <p>
+                        Add and manage match results
+                        for completed matches.
+                    </p>
+
+                </div>
+
+                <a href="/admin-results" class="button">
+                    OPEN →
+                </a>
+
+            </div>
+
+
+            <!-- POINTS TABLE -->
+
+            <div class="admin-card">
+
+                <div class="admin-info">
+
+                    <div class="admin-icon">
+                        📊
+                    </div>
+
+                    <h2>
+                        Points Table
+                    </h2>
+
+                    <p>
+                        Manage team standings, wins,
+                        losses and points.
+                    </p>
+
+                </div>
+
+                <a href="/admin-points-table" class="button">
+                    OPEN →
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <div class="footer">
+
+            Sportify © 2026 | College Sports Tournament Portal
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

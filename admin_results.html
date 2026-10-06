@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sportify - Manage Results</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #07152e, #0b2347);
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: #061329;
+            padding: 18px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #ffd43b;
+        }
+
+        .logout {
+            text-decoration: none;
+            background: #ffd43b;
+            color: #061329;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .logout:hover {
+            background: #ffea70;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .top-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #ffd43b;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            background: #123b70;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #1c4f91;
+        }
+
+        /* ================= FORM CARD ================= */
+
+        .form-card {
+            background: #0d2b52;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            margin-bottom: 35px;
+        }
+
+        .form-card h2 {
+            color: #ffd43b;
+            margin-bottom: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #f4f6f8;
+            color: #111;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: 3px solid #ffd43b;
+        }
+
+        .submit-btn {
+            margin-top: 22px;
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #ffd43b;
+            color: #061329;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #ffea70;
+        }
+
+        /* ================= RESULTS CARD ================= */
+
+        .results-card {
+            background: #0d2b52;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .results-card h2 {
+            color: #ffd43b;
+            margin-bottom: 20px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        th {
+            background: #123b70;
+            color: #ffd43b;
+            padding: 14px;
+            text-align: center;
+        }
+
+        td {
+            padding: 13px;
+            text-align: center;
+            border-bottom: 1px solid #31527c;
+        }
+
+        tr:hover {
+            background: #12345f;
+        }
+
+        .winner {
+            color: #ffd43b;
+            font-weight: bold;
+        }
+
+        .score {
+            font-weight: bold;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 25px;
+            color: #cbd5e1;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            color: #aebbd0;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 15px 20px;
+            }
+
+            .container {
+                width: 94%;
+                margin: 25px auto;
+            }
+
+            .top-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-card,
+            .results-card {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+        🏆 SPORTIFY
+    </div>
+
+    <a href="/logout" class="logout">
+        Logout
+    </a>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container">
+
+
+    <!-- TOP SECTION -->
+
+    <div class="top-section">
+
+        <h1>Manage Results</h1>
+
+        <a href="/admin-dashboard" class="back-btn">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- ================= ADD RESULT ================= -->
+
+    <div class="form-card">
+
+        <h2>🏆 Add Match Result</h2>
+
+        <form method="POST" action="/admin-results">
+
+
+            <div class="form-grid">
+
+
+                <!-- SPORT -->
+
+                <div class="form-group">
+
+                    <label>
+                        Select Sport
+                    </label>
+
+                    <select name="sport_id" required>
+
+                        <option value="">
+                            Select Sport
+                        </option>
+
+                        {% for sport in sports %}
+
+                        <option value="{{ sport.id }}">
+                            {{ sport.sport_name }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- TEAM 1 -->
+
+                <div class="form-group">
+
+                    <label>
+                        Team 1
+                    </label>
+
+                    <input
+                        type="text"
+                        name="team1"
+                        placeholder="Enter Team 1"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- TEAM 2 -->
+
+                <div class="form-group">
+
+                    <label>
+                        Team 2
+                    </label>
+
+                    <input
+                        type="text"
+                        name="team2"
+                        placeholder="Enter Team 2"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- WINNER -->
+
+                <div class="form-group">
+
+                    <label>
+                        Winner
+                    </label>
+
+                    <input
+                        type="text"
+                        name="winner"
+                        placeholder="Enter Winning Team"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- SCORE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Score
+                    </label>
+
+                    <input
+                        type="text"
+                        name="score"
+                        placeholder="Example: 2 - 1"
+                        required
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                + Add Result
+            </button>
+
+
+        </form>
+
+    </div>
+
+
+    <!-- ================= EXISTING RESULTS ================= -->
+
+    <div class="results-card">
+
+        <h2>📊 Match Results</h2>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Sport</th>
+
+                        <th>Team 1</th>
+
+                        <th>Team 2</th>
+
+                        <th>Winner</th>
+
+                        <th>Score</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% if results %}
+
+                        {% for result in results %}
+
+                        <tr>
+
+                            <td>
+                                {{ result.sport_name }}
+                            </td>
+
+                            <td>
+                                {{ result.team1 }}
+                            </td>
+
+                            <td>
+                                {{ result.team2 }}
+                            </td>
+
+                            <td class="winner">
+                                {{ result.winner }}
+                            </td>
+
+                            <td class="score">
+                                {{ result.score }}
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <tr>
+
+                            <td
+                                colspan="5"
+                                class="no-data"
+                            >
+                                No match results added yet.
+                            </td>
+
+                        </tr>
+
+                    {% endif %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    © 2026 Sportify | College Sports Tournament Portal
+
+</footer>
+
+
+</body>
+
+</html>

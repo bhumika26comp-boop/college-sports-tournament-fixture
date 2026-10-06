@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Sportify</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+
+            background:
+                linear-gradient(rgba(3, 15, 30, 0.88),
+                rgba(3, 15, 30, 0.92)),
+                url("https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=2000&q=80");
+
+            background-size: cover;
+            background-position: center;
+
+            color: white;
+        }
+
+        /* Navigation */
+
+        nav {
+            height: 80px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+
+            background: #f5c542;
+            color: #07111f;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 24px;
+        }
+
+        .home-btn {
+            color: white;
+            text-decoration: none;
+
+            padding: 10px 20px;
+
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 20px;
+        }
+
+        .home-btn:hover {
+            background: #f5c542;
+            color: #07111f;
+        }
+
+        /* Login Area */
+
+        .login-section {
+
+            min-height: calc(100vh - 80px);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 40px 20px;
+        }
+
+        .login-container {
+
+            width: 900px;
+            max-width: 100%;
+
+            text-align: center;
+        }
+
+        .login-container h1 {
+
+            font-size: 42px;
+
+            margin-bottom: 10px;
+        }
+
+        .login-container h1 span {
+
+            color: #f5c542;
+        }
+
+        .login-container > p {
+
+            color: #b8c6d6;
+
+            margin-bottom: 40px;
+        }
+
+        /* Cards */
+
+        .login-cards {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 30px;
+        }
+
+        .card {
+
+            width: 350px;
+
+            padding: 40px 30px;
+
+            background: rgba(255,255,255,0.10);
+
+            border: 1px solid rgba(255,255,255,0.20);
+
+            border-radius: 20px;
+
+            backdrop-filter: blur(12px);
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+
+            transform: translateY(-10px);
+
+            border-color: #f5c542;
+
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .icon {
+
+            font-size: 65px;
+
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+
+            font-size: 27px;
+
+            margin-bottom: 12px;
+        }
+
+        .card p {
+
+            color: #cbd5e1;
+
+            line-height: 1.5;
+
+            margin-bottom: 25px;
+        }
+
+        .login-btn {
+
+            display: inline-block;
+
+            width: 100%;
+
+            padding: 14px;
+
+            background: #f5c542;
+
+            color: #07111f;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+
+            background: white;
+
+            transform: scale(1.03);
+        }
+
+        /* Responsive */
+
+        @media(max-width: 750px) {
+
+            .login-cards {
+
+                flex-direction: column;
+
+                align-items: center;
+            }
+
+            .card {
+
+                width: 100%;
+
+                max-width: 400px;
+            }
+
+            .login-container h1 {
+
+                font-size: 32px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav>
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🏆
+            </div>
+
+            SPORTIFY
+
+        </div>
+
+        <a href="/" class="home-btn">
+            ← Home
+        </a>
+
+    </nav>
+
+
+    <!-- Login Section -->
+
+    <section class="login-section">
+
+        <div class="login-container">
+
+            <h1>
+                Welcome to <span>Sportify</span>
+            </h1>
+
+            <p>
+                Select your account type to continue
+            </p>
+
+
+            <div class="login-cards">
+
+
+                <!-- Admin -->
+
+                <div class="card">
+
+                    <div class="icon">
+                        👨‍💼
+                    </div>
+
+                    <h2>
+                        Admin
+                    </h2>
+
+                    <p>
+                        Manage registrations, fixtures,
+                        results and tournament activities.
+                    </p>
+
+                    <a href="/admin-login" class="login-btn">
+                        ADMIN LOGIN →
+                    </a>
+
+                </div>
+
+
+                <!-- Student -->
+
+                <div class="card">
+
+                    <div class="icon">
+                        🎓
+                    </div>
+
+                    <h2>
+                        Student
+                    </h2>
+
+                    <p>
+                        Register for sports, view fixtures,
+                        results and tournament points.
+                    </p>
+
+                    <a href="/student-login" class="login-btn">
+                        STUDENT LOGIN →
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+</body>
+
+</html>

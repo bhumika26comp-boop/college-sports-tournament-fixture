@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Registrations - Sportify</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background: #f3f6fb;
+
+            color: #14213d;
+
+        }
+
+
+        .container {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 40px 25px;
+
+        }
+
+
+        .top {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .top h1 {
+
+            font-size: 30px;
+
+        }
+
+
+        .back-btn {
+
+            text-decoration: none;
+
+            background: #071426;
+
+            color: white;
+
+            padding: 12px 20px;
+
+            border-radius: 8px;
+
+        }
+
+
+        .back-btn:hover {
+
+            background: #f7c83e;
+
+            color: #071426;
+
+        }
+
+
+        .card {
+
+            background: white;
+
+            border-radius: 15px;
+
+            padding: 25px;
+
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+
+            overflow-x: auto;
+
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+        }
+
+
+        th {
+
+            background: #071426;
+
+            color: white;
+
+            padding: 15px;
+
+            text-align: left;
+
+        }
+
+
+        td {
+
+            padding: 16px 15px;
+
+            border-bottom: 1px solid #e5e7eb;
+
+        }
+
+
+        tr:hover {
+
+            background: #f8fafc;
+
+        }
+
+
+        .sport {
+
+            font-weight: bold;
+
+        }
+
+
+        .status {
+
+            padding: 7px 13px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            display: inline-block;
+
+        }
+
+
+        .pending {
+
+            background: #fff3cd;
+
+            color: #856404;
+
+        }
+
+
+        .approved {
+
+            background: #d1fae5;
+
+            color: #065f46;
+
+        }
+
+
+        .rejected {
+
+            background: #fee2e2;
+
+            color: #991b1b;
+
+        }
+
+
+        .empty {
+
+            text-align: center;
+
+            padding: 50px;
+
+            color: #718096;
+
+        }
+
+
+        .register-btn {
+
+            display: inline-block;
+
+            margin-top: 20px;
+
+            background: #f7c83e;
+
+            color: #071426;
+
+            padding: 12px 20px;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="top">
+
+        <h1>
+            📋 My Registrations
+        </h1>
+
+        <a
+            href="/student-dashboard"
+            class="back-btn"
+        >
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+
+    <div class="card">
+
+
+        {% if registrations %}
+
+
+        <table>
+
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Sport
+                    </th>
+
+                    <th>
+                        Player / Team
+                    </th>
+
+                    <th>
+                        Department
+                    </th>
+
+                    <th>
+                        Academic Year
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+                {% for registration in registrations %}
+
+                <tr>
+
+
+                    <td class="sport">
+
+                        {% if registration["sport_name"] == "Football" %}
+                            ⚽
+                        {% elif registration["sport_name"] == "Cricket" %}
+                            🏏
+                        {% elif registration["sport_name"] == "Badminton" %}
+                            🏸
+                        {% elif registration["sport_name"] == "Basketball" %}
+                            🏀
+                        {% else %}
+                            🏆
+                        {% endif %}
+
+                        {{ registration["sport_name"] }}
+
+                    </td>
+
+
+                    <td>
+                        {{ registration["team_name"] }}
+                    </td>
+
+
+                    <td>
+                        {{ registration["department"] }}
+                    </td>
+
+
+                    <td>
+                        {{ registration["year"] }}
+                    </td>
+
+
+                    <td>
+
+
+                        {% if registration["status"] == "Approved" %}
+
+                            <span class="status approved">
+                                🟢 Approved
+                            </span>
+
+
+                        {% elif registration["status"] == "Rejected" %}
+
+                            <span class="status rejected">
+                                🔴 Rejected
+                            </span>
+
+
+                        {% else %}
+
+                            <span class="status pending">
+                                🟡 Pending
+                            </span>
+
+                        {% endif %}
+
+
+                    </td>
+
+
+                </tr>
+
+                {% endfor %}
+
+
+            </tbody>
+
+
+        </table>
+
+
+        {% else %}
+
+
+        <div class="empty">
+
+            <h2>
+                No Registrations Yet
+            </h2>
+
+            <p>
+                You have not registered for any sport.
+            </p>
+
+
+            <a
+                href="/student-dashboard"
+                class="register-btn"
+            >
+                Register for a Sport
+            </a>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

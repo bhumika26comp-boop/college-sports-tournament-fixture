@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Match Fixtures - Sportify</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background: linear-gradient(
+                135deg,
+                #071426,
+                #17365d
+            );
+
+            min-height: 100vh;
+
+            padding: 30px;
+        }
+
+
+        /* ================= HEADER ================= */
+
+        .header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            margin-bottom: 35px;
+        }
+
+
+        .logo {
+
+            color: #f7c83e;
+
+            font-size: 32px;
+
+            font-weight: bold;
+        }
+
+
+        .back-btn {
+
+            text-decoration: none;
+
+            background: #f7c83e;
+
+            color: #071426;
+
+            padding: 12px 20px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+
+        .back-btn:hover {
+
+            background: #eab62d;
+        }
+
+
+        /* ================= MAIN CONTAINER ================= */
+
+        .container {
+
+            max-width: 1100px;
+
+            margin: auto;
+        }
+
+
+        .title {
+
+            text-align: center;
+
+            color: white;
+
+            margin-bottom: 10px;
+
+            font-size: 34px;
+        }
+
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #cbd5e1;
+
+            margin-bottom: 35px;
+
+            font-size: 16px;
+        }
+
+
+        /* ================= FIXTURE CARD ================= */
+
+        .fixture-card {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            margin-bottom: 20px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0, 0, 0, 0.25);
+        }
+
+
+        .sport-name {
+
+            display: inline-block;
+
+            background: #f7c83e;
+
+            color: #071426;
+
+            padding: 7px 14px;
+
+            border-radius: 20px;
+
+            font-weight: bold;
+
+            margin-bottom: 20px;
+        }
+
+
+        .match {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+
+        .team {
+
+            flex: 1;
+
+            text-align: center;
+
+            font-size: 21px;
+
+            font-weight: bold;
+
+            color: #071426;
+
+            padding: 20px;
+        }
+
+
+        .vs {
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            color: #718096;
+
+            background: #f1f5f9;
+
+            padding: 12px 15px;
+
+            border-radius: 50%;
+        }
+
+
+        /* ================= MATCH DETAILS ================= */
+
+        .details {
+
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 25px;
+
+            margin-top: 20px;
+
+            padding-top: 18px;
+
+            border-top: 1px solid #e2e8f0;
+
+            color: #475569;
+
+        }
+
+
+        .detail {
+
+            font-size: 15px;
+
+        }
+
+
+        .detail strong {
+
+            color: #071426;
+        }
+
+
+        /* ================= EMPTY MESSAGE ================= */
+
+        .no-fixtures {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 50px 20px;
+
+            text-align: center;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0, 0, 0, 0.25);
+        }
+
+
+        .no-fixtures .icon {
+
+            font-size: 60px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .no-fixtures h2 {
+
+            color: #071426;
+
+            margin-bottom: 10px;
+        }
+
+
+        .no-fixtures p {
+
+            color: #718096;
+
+            font-size: 16px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 600px) {
+
+            body {
+
+                padding: 20px;
+            }
+
+
+            .header {
+
+                flex-direction: column;
+
+                gap: 20px;
+            }
+
+
+            .title {
+
+                font-size: 28px;
+            }
+
+
+            .match {
+
+                flex-direction: column;
+
+                gap: 10px;
+            }
+
+
+            .team {
+
+                width: 100%;
+
+                padding: 10px;
+            }
+
+
+            .vs {
+
+                padding: 8px 12px;
+            }
+
+
+            .details {
+
+                flex-direction: column;
+
+                align-items: center;
+
+                gap: 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="header">
+
+        <div class="logo">
+            SPORTIFY
+        </div>
+
+        <a href="/student-dashboard" class="back-btn">
+            ← Student Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="container">
+
+        <h1 class="title">
+            🏆 Match Fixtures
+        </h1>
+
+        <p class="subtitle">
+            View upcoming college tournament matches
+        </p>
+
+
+        <!-- ================= FIXTURES ================= -->
+
+        {% if fixtures %}
+
+            {% for fixture in fixtures %}
+
+                <div class="fixture-card">
+
+                    <div class="sport-name">
+
+                        {% if fixture["sport_name"] == "Football" %}
+                            ⚽
+                        {% elif fixture["sport_name"] == "Cricket" %}
+                            🏏
+                        {% elif fixture["sport_name"] == "Badminton" %}
+                            🏸
+                        {% elif fixture["sport_name"] == "Basketball" %}
+                            🏀
+                        {% else %}
+                            🏆
+                        {% endif %}
+
+                        {{ fixture["sport_name"] }}
+
+                    </div>
+
+
+                    <div class="match">
+
+                        <div class="team">
+                            {{ fixture["team1"] }}
+                        </div>
+
+
+                        <div class="vs">
+                            VS
+                        </div>
+
+
+                        <div class="team">
+                            {{ fixture["team2"] }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="details">
+
+                        <div class="detail">
+
+                            📅
+
+                            <strong>Date:</strong>
+
+                            {{ fixture["match_date"] }}
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            ⏰
+
+                            <strong>Time:</strong>
+
+                            {{ fixture["match_time"] }}
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            📍
+
+                            <strong>Venue:</strong>
+
+                            {{ fixture["venue"] }}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <!-- ================= NO FIXTURES ================= -->
+
+            <div class="no-fixtures">
+
+                <div class="icon">
+                    📅
+                </div>
+
+                <h2>
+                    No Fixtures Available
+                </h2>
+
+                <p>
+                    Match fixtures have not been published yet.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+
+</body>
+
+</html>

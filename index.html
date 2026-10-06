@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sportify - College Sports Tournament Portal</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background:
+                linear-gradient(
+                    rgba(7, 20, 38, 0.82),
+                    rgba(7, 20, 38, 0.88)
+                ),
+                url("https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=2000&q=80");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            color: white;
+        }
+
+        .navbar {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            background: rgba(7, 20, 38, 0.75);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 42px;
+        }
+
+        .logo-text {
+            font-size: 25px;
+            font-weight: bold;
+            color: #f7c83e;
+        }
+
+        .logo-subtitle {
+            font-size: 12px;
+            color: #d5dbea;
+        }
+
+        .hero {
+            min-height: calc(100vh - 80px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 40px 20px;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .trophy {
+            font-size: 80px;
+            margin-bottom: 20px;
+
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+
+        }
+
+        h1 {
+            font-size: 58px;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        h1 span {
+            color: #f7c83e;
+        }
+
+        .tagline {
+            font-size: 21px;
+            color: #dce4f2;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        .sports {
+
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+
+            flex-wrap: wrap;
+
+            margin-bottom: 40px;
+        }
+
+        .sport {
+
+            padding: 12px 18px;
+
+            background: rgba(255,255,255,0.12);
+
+            border: 1px solid rgba(255,255,255,0.2);
+
+            border-radius: 30px;
+
+            font-size: 16px;
+
+            backdrop-filter: blur(5px);
+        }
+
+        .login-btn {
+
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: #f7c83e;
+
+            color: #071426;
+
+            padding: 17px 45px;
+
+            border-radius: 10px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 8px 25px rgba(247, 200, 62, 0.25);
+        }
+
+        .login-btn:hover {
+
+            background: white;
+
+            transform: translateY(-3px);
+
+        }
+
+        .features {
+
+            margin-top: 45px;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 35px;
+
+            flex-wrap: wrap;
+
+            color: #dce4f2;
+
+        }
+
+        .feature {
+            font-size: 14px;
+        }
+
+        @media(max-width: 700px) {
+
+            h1 {
+                font-size: 40px;
+            }
+
+            .tagline {
+                font-size: 17px;
+            }
+
+            .navbar {
+                padding: 0 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🏆
+        </div>
+
+        <div>
+
+            <div class="logo-text">
+                SPORTIFY
+            </div>
+
+            <div class="logo-subtitle">
+                College Sports Portal
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- HERO SECTION -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+
+        <div class="trophy">
+            🏆
+        </div>
+
+
+        <h1>
+
+            College Sports
+            <span>Tournament</span>
+
+        </h1>
+
+
+        <p class="tagline">
+
+            Register for your favorite sports,
+            follow match fixtures, track results
+            and experience the excitement of
+            college tournaments.
+
+        </p>
+
+
+
+        <!-- SPORTS -->
+
+        <div class="sports">
+
+            <div class="sport">
+                ⚽ Football
+            </div>
+
+            <div class="sport">
+                🏏 Cricket
+            </div>
+
+            <div class="sport">
+                🏸 Badminton
+            </div>
+
+            <div class="sport">
+                🏀 Basketball
+            </div>
+
+        </div>
+
+
+
+        <!-- LOGIN BUTTON -->
+
+        <a
+            href="/login"
+            class="login-btn"
+        >
+
+            🔐 LOGIN NOW
+
+        </a>
+
+
+
+        <!-- FEATURES -->
+
+        <div class="features">
+
+            <div class="feature">
+                📝 Easy Registration
+            </div>
+
+            <div class="feature">
+                📅 Match Fixtures
+            </div>
+
+            <div class="feature">
+                🏆 Live Results
+            </div>
+
+            <div class="feature">
+                📊 Points Table
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+</body>
+
+</html>

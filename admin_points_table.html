@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sportify - Admin Points Table</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background: linear-gradient(
+                135deg,
+                #071426,
+                #17365d
+            );
+
+            min-height: 100vh;
+
+            color: white;
+
+            padding-bottom: 40px;
+
+        }
+
+
+        /* HEADER */
+
+        .header {
+
+            background: #06111f;
+
+            padding: 20px 50px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.3);
+
+        }
+
+
+        .logo {
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            color: #f7c83e;
+
+        }
+
+
+        .logo span {
+
+            color: white;
+
+        }
+
+
+        .logout {
+
+            text-decoration: none;
+
+            background: #f7c83e;
+
+            color: #071426;
+
+            padding: 10px 20px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+        }
+
+
+        .logout:hover {
+
+            background: #eab62d;
+
+        }
+
+
+        /* MAIN */
+
+        .main {
+
+            width: 90%;
+
+            max-width: 1200px;
+
+            margin: 40px auto;
+
+        }
+
+
+        .page-title {
+
+            text-align: center;
+
+            font-size: 36px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .page-subtitle {
+
+            text-align: center;
+
+            color: #cbd5e1;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        /* ADD POINTS CARD */
+
+        .form-card {
+
+            background: #0d2139;
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            margin-bottom: 35px;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.3);
+
+        }
+
+
+        .form-card h2 {
+
+            color: #f7c83e;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .form-group {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-weight: bold;
+
+            color: white;
+
+        }
+
+
+        input,
+        select {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+        }
+
+
+        input:focus,
+        select:focus {
+
+            outline: 2px solid #f7c83e;
+
+        }
+
+
+        .add-btn {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #f7c83e;
+
+            color: #071426;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 10px;
+
+        }
+
+
+        .add-btn:hover {
+
+            background: #eab62d;
+
+        }
+
+
+        /* POINTS TABLE */
+
+        .table-card {
+
+            background: #0d2139;
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.3);
+
+        }
+
+
+        .table-card h2 {
+
+            color: #f7c83e;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .table-container {
+
+            overflow-x: auto;
+
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 700px;
+
+        }
+
+
+        th {
+
+            background: #f7c83e;
+
+            color: #071426;
+
+            padding: 14px;
+
+            text-align: center;
+
+        }
+
+
+        td {
+
+            padding: 14px;
+
+            text-align: center;
+
+            border-bottom: 1px solid #29415e;
+
+        }
+
+
+        tr:hover td {
+
+            background: #122d4c;
+
+        }
+
+
+        .points {
+
+            color: #f7c83e;
+
+            font-weight: bold;
+
+        }
+
+
+        .empty {
+
+            text-align: center;
+
+            color: #cbd5e1;
+
+            padding: 25px;
+
+        }
+
+
+        /* BACK BUTTON */
+
+        .back {
+
+            display: inline-block;
+
+            margin-top: 25px;
+
+            text-decoration: none;
+
+            color: #071426;
+
+            background: #f7c83e;
+
+            padding: 12px 22px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+        }
+
+
+        .back:hover {
+
+            background: #eab62d;
+
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .header {
+
+                padding: 18px 20px;
+
+            }
+
+            .logo {
+
+                font-size: 22px;
+
+            }
+
+            .logout {
+
+                padding: 8px 12px;
+
+                font-size: 13px;
+
+            }
+
+            .main {
+
+                width: 94%;
+
+                margin-top: 25px;
+
+            }
+
+            .page-title {
+
+                font-size: 28px;
+
+            }
+
+            .form-card,
+            .table-card {
+
+                padding: 20px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+
+    <div class="logo">
+
+        🏆 <span>SPORTIFY</span>
+
+    </div>
+
+
+    <a href="/logout"
+       class="logout">
+
+        Logout
+
+    </a>
+
+
+</div>
+
+
+
+<!-- MAIN -->
+
+<div class="main">
+
+
+    <h1 class="page-title">
+
+        🏆 Admin Points Table
+
+    </h1>
+
+
+    <p class="page-subtitle">
+
+        Add and manage points for each sports team.
+
+    </p>
+
+
+
+    <!-- ADD POINTS -->
+
+    <div class="form-card">
+
+
+        <h2>
+
+            ➕ Add Points
+
+        </h2>
+
+
+        <form method="POST"
+              action="/admin-points-table">
+
+
+            <!-- SPORT -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Select Sport
+
+                </label>
+
+
+                <select name="sport_id"
+                        required>
+
+
+                    <option value="">
+
+                        Select Sport
+
+                    </option>
+
+
+                    {% for sport in sports %}
+
+                    <option value="{{ sport['id'] }}">
+
+                        {{ sport['sport_name'] }}
+
+                    </option>
+
+                    {% endfor %}
+
+
+                </select>
+
+            </div>
+
+
+
+            <!-- TEAM -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Team Name
+
+                </label>
+
+
+                <input
+                    type="text"
+                    name="team_name"
+                    placeholder="Enter team name"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- PLAYED -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Matches Played
+
+                </label>
+
+
+                <input
+                    type="number"
+                    name="played"
+                    min="0"
+                    placeholder="Enter matches played"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- WON -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Matches Won
+
+                </label>
+
+
+                <input
+                    type="number"
+                    name="won"
+                    min="0"
+                    placeholder="Enter matches won"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- LOST -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Matches Lost
+
+                </label>
+
+
+                <input
+                    type="number"
+                    name="lost"
+                    min="0"
+                    placeholder="Enter matches lost"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- POINTS -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Points
+
+                </label>
+
+
+                <input
+                    type="number"
+                    name="points"
+                    min="0"
+                    placeholder="Enter points"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- BUTTON -->
+
+            <button
+                type="submit"
+                class="add-btn">
+
+                ➕ Add Points
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+
+    <!-- CURRENT POINTS -->
+
+    <div class="table-card">
+
+
+        <h2>
+
+            📊 Current Points Table
+
+        </h2>
+
+
+        {% if points %}
+
+
+        <div class="table-container">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Sport
+                        </th>
+
+                        <th>
+                            Team Name
+                        </th>
+
+                        <th>
+                            Played
+                        </th>
+
+                        <th>
+                            Won
+                        </th>
+
+                        <th>
+                            Lost
+                        </th>
+
+                        <th>
+                            Points
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    {% for point in points %}
+
+
+                    <tr>
+
+
+                        <td>
+
+                            {{ point["sport_name"] }}
+
+                        </td>
+
+
+                        <td>
+
+                            {{ point["team_name"] }}
+
+                        </td>
+
+
+                        <td>
+
+                            {{ point["played"] }}
+
+                        </td>
+
+
+                        <td>
+
+                            {{ point["won"] }}
+
+                        </td>
+
+
+                        <td>
+
+                            {{ point["lost"] }}
+
+                        </td>
+
+
+                        <td class="points">
+
+                            {{ point["points"] }}
+
+                        </td>
+
+
+                    </tr>
+
+
+                    {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="empty">
+
+            No points have been added yet.
+
+        </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+
+    <!-- BACK -->
+
+    <a href="/admin-dashboard"
+       class="back">
+
+        ← Back to Admin Dashboard
+
+    </a>
+
+
+</div>
+
+
+</body>
+
+</html>

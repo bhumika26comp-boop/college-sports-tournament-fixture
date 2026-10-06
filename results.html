@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Results - Sportify</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #071426, #17365d);
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .header {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .logo {
+            color: #f7c83e;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            background: #f7c83e;
+            color: #071426;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #eab62d;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .title {
+            text-align: center;
+            color: white;
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #cbd5e1;
+            margin-bottom: 35px;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .sport-name {
+            display: inline-block;
+            background: #f7c83e;
+            color: #071426;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .team {
+            flex: 1;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #071426;
+            padding: 15px;
+        }
+
+        .score {
+            font-size: 22px;
+            font-weight: bold;
+            color: #17365d;
+            background: #f1f5f9;
+            padding: 12px 20px;
+            border-radius: 10px;
+        }
+
+        .winner {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid #e2e8f0;
+            color: #475569;
+        }
+
+        .winner strong {
+            color: #071426;
+        }
+
+        .no-results {
+            background: white;
+            border-radius: 18px;
+            padding: 50px 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .no-results .icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .no-results h2 {
+            color: #071426;
+            margin-bottom: 10px;
+        }
+
+        .no-results p {
+            color: #718096;
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 20px;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .title {
+                font-size: 28px;
+            }
+
+            .teams {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .team {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="header">
+
+        <div class="logo">
+            SPORTIFY
+        </div>
+
+        <a href="/student-dashboard" class="back-btn">
+            ← Student Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="container">
+
+        <h1 class="title">
+            🏆 Match Results
+        </h1>
+
+        <p class="subtitle">
+            View completed tournament match results
+        </p>
+
+
+        {% if results %}
+
+            {% for result in results %}
+
+                <div class="result-card">
+
+                    <div class="sport-name">
+
+                        {% if result["sport_name"] == "Football" %}
+                            ⚽
+                        {% elif result["sport_name"] == "Cricket" %}
+                            🏏
+                        {% elif result["sport_name"] == "Badminton" %}
+                            🏸
+                        {% elif result["sport_name"] == "Basketball" %}
+                            🏀
+                        {% else %}
+                            🏆
+                        {% endif %}
+
+                        {{ result["sport_name"] }}
+
+                    </div>
+
+
+                    <div class="teams">
+
+                        <div class="team">
+                            {{ result["team1"] }}
+                        </div>
+
+                        <div class="score">
+                            {{ result["score"] }}
+                        </div>
+
+                        <div class="team">
+                            {{ result["team2"] }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="winner">
+
+                        🥇
+
+                        <strong>Winner:</strong>
+
+                        {{ result["winner"] }}
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+
+        {% else %}
+
+            <div class="no-results">
+
+                <div class="icon">
+                    🏆
+                </div>
+
+                <h2>
+                    No Results Available
+                </h2>
+
+                <p>
+                    Match results have not been published yet.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+
+    </div>
+
+</body>
+
+</html>
